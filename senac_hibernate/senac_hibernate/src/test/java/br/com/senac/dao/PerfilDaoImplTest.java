@@ -66,8 +66,8 @@ public class PerfilDaoImplTest {
     public void testPesquisarPorId() {
         System.out.println("pesquisarPorId");
         buscarPerfilBD();
-        sessao = HibernateUtil.abrirConexao();                              //abre conexão                 
-        Perfil perfilPesquisado = perfilDao.pesquisarPorId(perfil.getId(), sessao);                   //instancia perfilDao para usar método pesquisar
+        sessao = HibernateUtil.abrirConexao();                                              
+        Perfil perfilPesquisado = perfilDao.pesquisarPorId(perfil.getId(), sessao);                   
         sessao.close();
         assertNotNull(perfilPesquisado);
     }
@@ -100,14 +100,14 @@ public class PerfilDaoImplTest {
 
     public Perfil buscarPerfilBD() {
         sessao = HibernateUtil.abrirConexao();
-        Query<Perfil> consulta = sessao.createQuery("from Perfil p");     //HQL    perfil é a classe java.        
+        Query<Perfil> consulta = sessao.createQuery("from Perfil p");           
         consulta.setMaxResults(1);
         List<Perfil> perfis = consulta.getResultList();
-        sessao.close();                                                     //fecha conexão
+        sessao.close();                                                     
         if (perfis.isEmpty()) {
-            testSalvar();                                                   //se vazia, chama o teste salvar e cria perfil
+            testSalvar();                                                   
         } else {
-            perfil = perfis.get(0);                                      //busca o primeiro da lista
+            perfil = perfis.get(0);                                     
         }
         return perfil;
     }

@@ -6,6 +6,7 @@
 package br.com.senac.dao;
 
 import br.com.senac.entidade.Cliente;
+import br.com.senac.entidade.Profissao;
 import static br.com.senac.util.Gerador.*;
 import java.util.List;
 import org.hibernate.Session;
@@ -18,25 +19,28 @@ import org.junit.Test;
  * @author pedro.abreu
  */
 public class ClienteDaoImplTest {
-
+    
     private Cliente cliente;
     private ClienteDao clienteDao;
     private Session sessao;
-
+    
     public ClienteDaoImplTest() {
         clienteDao = new ClienteDaoImpl();
     }
-
+    
     @Test
     public void testSalvar() {
         System.out.println("salvar");
+        ProfissaoDaoImplTest pdit = new ProfissaoDaoImplTest();
+        Profissao profissao = pdit.buscarProfissaoBD();
         cliente = new Cliente(gerarNome2(), gerarCpf(), gerarCep(), Double.valueOf(gerarNumero(5)));
+        cliente.setProfissao(profissao);
         sessao = HibernateUtil.abrirConexao();
         clienteDao.salvarOuAlterar(cliente, sessao);
         sessao.close();
         assertNotNull(cliente.getId());
     }
-
+    
     @Test
     public void testAlterar() {
         System.out.println("alterar");
@@ -50,7 +54,7 @@ public class ClienteDaoImplTest {
         sessao.close();
         assertEquals(clientePesquisado.getNome(), cliente.getNome());
     }
-
+    
     @Test
     public void testExcluir() {
         System.out.println("excluir");
@@ -61,7 +65,7 @@ public class ClienteDaoImplTest {
         sessao.close();
         assertNull(clienteExcluido);
     }
-
+    
     @Test
     public void testPesquisarPorId() {
         System.out.println("pesquisarPorId");
@@ -71,7 +75,7 @@ public class ClienteDaoImplTest {
         sessao.close();
         assertNotNull(clientePesquisado);
     }
-
+    
     @Test
     public void testPesquisarPorNome() {
         System.out.println("pesquisarPorNome");
@@ -81,7 +85,7 @@ public class ClienteDaoImplTest {
         sessao.close();
         assertTrue(clientes.size() > 0);
     }
-
+    
     @Test
     public void testPesquisarTodos() {
         System.out.println("pesquisarTodos");
@@ -92,18 +96,18 @@ public class ClienteDaoImplTest {
         mostrar(clientes);
         assertTrue(!clientes.isEmpty());
     }
-
+    
     private void mostrarSorted(List<Cliente> clientes) {
         clientes.stream()
                 .sorted((cli1, cli2) -> cli1.getNome().compareTo(cli2.getNome()))
                 .forEach(cli -> System.out.println(cli.toStringCliente()));
     }
-
+    
     private void mostrar(List<Cliente> clientes) {
         clientes.stream()
                 .forEach(cli -> System.out.println(cli.toStringCliente()));
     }
-
+    
     public Cliente buscarClienteBD() {
         sessao = HibernateUtil.abrirConexao();
         Query<Cliente> consulta = sessao.createQuery("from Cliente c");     //HQL    cliente é a classe java.        

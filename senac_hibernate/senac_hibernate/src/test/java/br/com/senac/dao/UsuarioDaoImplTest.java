@@ -5,6 +5,7 @@
  */
 package br.com.senac.dao;
 
+import br.com.senac.entidade.Perfil;
 import br.com.senac.entidade.Usuario;
 import static br.com.senac.util.Gerador.*;
 import java.util.List;
@@ -30,7 +31,10 @@ public class UsuarioDaoImplTest {
     @Test
     public void testSalvar() {
         System.out.println("salvar");
+        PerfilDaoImplTest pdit = new PerfilDaoImplTest();
+        Perfil perfil = pdit.buscarPerfilBD();
         usuario = new Usuario(gerarNome2(), gerarLogin() + gerarNumero(3), gerarSenha(6));
+        usuario.setPerfil(perfil);
         sessao = HibernateUtil.abrirConexao();
         usuarioDao.salvarOuAlterar(usuario, sessao);
         sessao.close();

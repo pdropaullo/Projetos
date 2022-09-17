@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: br.com.senac.dao.ClienteDaoImplTest
+Test set: br.com.senac.dao.ProfissaoDaoImplTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.809 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.734 sec

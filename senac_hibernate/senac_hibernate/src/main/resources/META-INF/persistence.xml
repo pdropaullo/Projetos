@@ -5,6 +5,7 @@
     <class>br.com.senac.entidade.Usuario</class>
     <class>br.com.senac.dao.NewEntity</class>
     <class>br.com.senac.entidade.Perfil</class>
+    <class>br.com.senac.entidade.Profissao</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/senac_hibernate?useTimezone=true&amp;serverTimezone=America/Sao_Paulo&amp;zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
